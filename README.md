@@ -1,6 +1,6 @@
-# QRForge Pro - Advanced QR Code Generator & Scanner
+# QRF - Quick Response FDA | Modern QR Code Generator & Scanner
 
-**QRForge Pro** adalah aplikasi web modern, tangguh, dan berkinerja tinggi untuk membuat (*generate*) dan memindai (*scan*) QR Code secara interaktif. Aplikasi ini berjalan **100% di sisi klien saja (Client-Side)**, sepenuhnya luring (*offline-first*), tanpa bergantung pada server luar untuk kalkulasi gambar ataupun dekripsi sandi jaringan.
+**QRF - Quick Response FDA** adalah aplikasi web modern, tangguh, dan berkinerja tinggi untuk membuat (*generate*) dan memindai (*scan*) QR Code secara interaktif. Aplikasi ini berjalan **100% di sisi klien saja (Client-Side)**, sepenuhnya luring (*offline-first*), tanpa bergantung pada server luar untuk kalkulasi gambar ataupun dekripsi sandi jaringan.
 
 Dibuat dengan memadukan keindahan antarmuka bergaya **Glassmorphism**, akurasi rendering vektor tinggi, dan kegunaan fitur ramah pakai seperti penguraian otomatis kartu kontak vCard dan konfigurasi sandi Wi-Fi sekali-ketuk.
 
@@ -49,9 +49,10 @@ Sesuai tuntutan arsitektur pengembangan profesional:
 │   │   ├── generator.js  # Generator logika, skema gradasi warna, dan pengunggah logo
 │   │   └── scanner.js    # Penanganan feed kamera, disinfeksi string penangkap, dan decoding
 │   └── index.html        # Kerangka HTML5 berlokalisasi bahasa Indonesia dengan glassmorphism
-├── dist/                 # Folder hasil kompilasi produksi final (Auto-generated)
+├── assets/               # Folder aset hasil kompilasi produksi (CSS, JS, gambar)
+├── index.html            # Berkas HTML utama hasil kompilasi produksi
 ├── package.json          # Koordinat dependensi npm dan skrip otomasi kompilasi
-├── vite.config.ts        # Setelan bundler Vite (mendefinisikan web-src/ sebagai root utama)
+├── vite.config.ts        # Setelan bundler Vite (mendefinisikan web-src/ sebagai root utama dan output ke root proyek)
 ├── .gitignore            # Daftar berkas harian yang tidak masuk penyimpanan Git
 └── README.md             # Panduan pengoperasian teknis (Berkas ini)
 ```
@@ -77,7 +78,7 @@ Setelah berjalan, buka penjelajah web Anda dan arahkan alamat ke:
 `http://localhost:3000`
 
 ### 3. Melakukan Build Produksi
-Skrip build yang dikonfigurasikan akan mengemas seluruh kode sumber mentah di dalam `web-src/` menjadi berkas produksi terkompresi di folder `/dist` dan secara otomatis menduplikasikan berkas-berkas tersebut ke **Root Folder** agar siap dideploy di host web statis tanpa subdirektori tambahan:
+Skrip build yang dikonfigurasikan akan mengemas seluruh kode sumber mentah di dalam `web-src/` menjadi berkas produksi terkompresi langsung ke **Root Folder** (menghasilkan folder `assets/` dan berkas `index.html` di root) agar siap dideploy di host web statis tanpa subdirektori tambahan:
 ```bash
 npm run build
 ```
@@ -86,7 +87,7 @@ npm run build
 
 ## ☁️ DEPLOY KE GITHUB PAGES
 
-GitHub Pages mencari berkas `index.html` dan `assets/` langsung di root cabang Anda (atau dalam folder `/docs`). Karena proyek ini dikonfigurasikan agar proses `npm run build` menduplikasi hasil akhir kompilasi produksi langsung ke root folder:
+GitHub Pages mencari berkas `index.html` dan `assets/` langsung di root cabang Anda (atau dalam folder `/docs`). Karena proyek ini dikonfigurasikan agar proses `npm run build` mendistribusikan hasil akhir kompilasi produksi langsung ke root folder:
 
 ### Cara Cepat Deploy lewat Git:
 
@@ -94,11 +95,11 @@ GitHub Pages mencari berkas `index.html` dan `assets/` langsung di root cabang A
    ```bash
    git init
    git add .
-   git commit -m "feat: inisiasi awal Advanced QR Generator & Scanner"
+   git commit -m "feat: inisiasi awal QRF - Quick Response FDA"
    ```
 2. **Koneksikan ke Repositori GitHub**:
    ```bash
-   git remote add origin https://github.com/USERNAME/REPO-NAME.git
+   git remote add origin https://github.com/FaizalDwiA/qrf-quick-response-fda-website.git
    ```
 3. **Kirim Perubahan (Push)**:
    ```bash
@@ -112,7 +113,7 @@ GitHub Pages mencari berkas `index.html` dan `assets/` langsung di root cabang A
    - Pada kolom *Branch*, pilih **`main`** (atau cabang utama Anda) dan pilih folder **`/ (root)`**.
    - Klik **Save**.
    - Tunggu sekitar 1-2 menit, situs Anda akan live di alamat:  
-     `https://USERNAME.github.io/REPO-NAME/`
+     `https://FaizalDwiA.github.io/qrf-quick-response-fda-website/`
 
 ---
 
