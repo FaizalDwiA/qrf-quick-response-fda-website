@@ -4,6 +4,7 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+    base: './',
     root: 'web-src',
     plugins: [tailwindcss()],
     resolve: {
