@@ -118,4 +118,4 @@ GitHub Pages mencari berkas `index.html` dan `assets/` langsung di root cabang A
 ---
 
 ## 🔒 LISENSI
-Didistribusikan di bawah Lisensi Apache-2.0. Silakan manfaatkan, adaptasi, dan kembangkan lebih lanjut!
+Didistribusikan di bawah Lisensi FDA. Silakan manfaatkan, adaptasi, dan kembangkan lebih lanjut!
