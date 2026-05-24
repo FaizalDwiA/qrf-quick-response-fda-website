@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* Custom animations and styling details */
+@keyframes scan {
+  0%, 100% {
+    top: 0%;
+  }
+  50% {
+    top: 100%;
+  }
+}
+
+.scanner-laser {
+  animation: scan 2.5s ease-in-out infinite;
+}
+
+/* Glassmorphism utility enhancements */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.glass-card {
+  background: rgba(30, 41, 59, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+}
+
+.glass-input {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(71, 85, 105, 0.5);
+}
+
+.glass-input:focus {
+  border-color: rgba(99, 102, 241, 0.8);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+/* Beautiful custom scrollbar for dark mode */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.8);
+}

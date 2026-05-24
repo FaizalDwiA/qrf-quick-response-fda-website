@@ -1,0 +1,6 @@
+{
+  "name": "Advanced QR Code Generator & Scanner",
+  "description": "A powerful client-side QR Code Creator and Barcode Scanners with custom gradients, branding logos, shape options, and vCard/WiFi network generators.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

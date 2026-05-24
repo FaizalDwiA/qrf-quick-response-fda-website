@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QRF - Quick Response FDA | Modern QR Code Generator & Scanner</title>
+    
+    <!-- Primary SEO Meta Tags -->
+    <meta name="title" content="QRF - Quick Response Faizal | Modern QR Code Generator & Scanner" />
+    <meta name="description" content="QRF (Quick Response Faizal) adalah aplikasi web modern, cepat, dan premium untuk membuat (Generate) dan memindai (Scan) QR Code secara instan. Dilengkapi dengan kustomisasi gradasi warna, gaya sudut, dan integrasi logo branding." />
+    <meta name="keywords" content="QRF, Quick Response Faizal, QR Code Generator, QR Code Scanner, Pembuat QR Code, Pemindai QR Code, QR Code Custom, vCard QR Code, WiFi QR Code, Faizal Dwi Al Farizi, QR Scanner, QR Maker" />
+    <meta name="author" content="Faizal Dwi Al Farizi" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Mobile & Browser Themes -->
+    <meta name="theme-color" content="#090d16" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="QRF" />
+    
+    <!-- Open Graph / Facebook / Discord / LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="QRF - Quick Response Faizal | Modern QR Code Generator & Scanner" />
+    <meta property="og:description" content="Buat dan pindai QR Code secara instan dengan kustomisasi warna gradasi, gaya sudut, dan logo tengah secara premium dan responsif." />
+    <meta property="og:image" content="./img/logo.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="QRF - Quick Response Faizal" />
+    
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="QRF - Quick Response Faizal | Modern QR Code Generator & Scanner" />
+    <meta name="twitter:description" content="Buat dan pindai QR Code secara instan dengan kustomisasi warna gradasi, gaya sudut, dan logo tengah secara premium dan responsif." />
+    <meta name="twitter:image" content="./img/logo.webp" />
+
+    <!-- Website Favicon & Touch Icons -->
+    <link rel="icon" type="image/x-icon" href="./img/logo.ico" />
+    <link rel="apple-touch-icon" href="./img/logo.webp" />
+    
+    <!-- Tailwind Custom CSS processed via Vite -->
+    <link rel="stylesheet" href="./css/style.css" />
+    <!-- Lucide Icons CDN for beautiful vector icons in Vanilla JS -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500/30 selection:text-indigo-200">
+    
+    <!-- HEADER -->
+    <header id="app-header" class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="p-1 bg-gradient-to-tr from-indigo-500 to-violet-500 rounded-xl shadow-lg shadow-indigo-500/20 w-10 h-10 overflow-hidden flex items-center justify-center">
+            <img src="./img/logo.webp" alt="QRF Logo" class="w-full h-full object-cover rounded-lg" />
+          </div>
+          <div>
+            <h1 class="font-bold text-lg tracking-tight bg-gradient-to-r from-white via-slate-100 to-indigo-200 bg-clip-text text-transparent">QRF</h1>
+            <p class="text-[10px] text-slate-400 font-mono tracking-widest uppercase">Quick Response FDA</p>
+          </div>
+        </div>
+
+        <!-- MODE SELECTOR TABS -->
+        <div class="flex bg-slate-900/90 p-1 rounded-xl border border-slate-800" id="mode-selector">
+          <button id="btn-mode-gen" class="flex items-center space-x-2 px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-md shadow-indigo-500/10">
+            <i data-lucide="plus-circle" class="h-4 w-4"></i>
+            <span>Generator</span>
+          </button>
+          <button id="btn-mode-scan" class="flex items-center space-x-2 px-4 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 transition-all duration-200">
+            <i data-lucide="scan-line" class="h-4 w-4"></i>
+            <span>Scanner</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN DASHBOARD CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col justify-center">
+      
+      <!-- GENERATOR VIEW -->
+      <section id="view-generator" class="grid grid-cols-1 lg:grid-cols-12 gap-8 transition-opacity duration-300">
+        
+        <!-- LEFT PANEL: INPUTS & CUSTOMIZATION (8 COLS) -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <!-- STEP 1: PILIH TIPE DATA -->
+          <div class="glass-panel p-6 rounded-2xl shadow-xl" id="card-data-type">
+            <div class="flex items-center space-x-3 mb-6">
+              <span class="flex items-center justify-center w-7 h-7 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-lg text-xs font-bold">1</span>
+              <h2 class="text-sm font-semibold tracking-wider text-slate-300 uppercase">Tipe Data QR Code</h2>
+            </div>
+
+            <!-- TYPE TAB BUTTONS -->
+            <div class="grid grid-cols-3 gap-2 p-1 bg-slate-950 rounded-xl border border-slate-800" id="data-tabs">
+              <button id="tab-text" class="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 py-2.5 rounded-lg text-xs font-semibold tracking-wide transition-all duration-200 bg-slate-900 border border-slate-800 text-white shadow-sm">
+                <i data-lucide="link" class="h-4 w-4 text-indigo-400"></i>
+                <span>Teks / URL</span>
+              </button>
+              <button id="tab-wifi" class="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 py-2.5 rounded-lg text-xs font-semibold tracking-wide transition-all duration-200 text-slate-400 hover:text-slate-200">
+                <i data-lucide="wifi" class="h-4 w-4 text-emerald-400"></i>
+                <span>WiFi Network</span>
+              </button>
+              <button id="tab-vcard" class="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 py-2.5 rounded-lg text-xs font-semibold tracking-wide transition-all duration-200 text-slate-400 hover:text-slate-200">
+                <i data-lucide="contact-2" class="h-4 w-4 text-amber-400"></i>
+                <span>vCard Kontak</span>
+              </button>
+            </div>
+
+            <!-- DYNAMIC INPUT FIELDS -->
+            <div class="mt-6" id="input-container">
+              
+              <!-- TAB 1: TEXT/URL INPUTS -->
+              <div id="fields-text" class="space-y-4">
+                <div class="space-y-1.5">
+                  <label for="input-qr-text" class="text-xs font-medium text-slate-400">Masukkan Teks atau URL Web</label>
+                  <input type="text" id="input-qr-text" placeholder="https://example.com" class="w-full glass-input px-4 py-3 rounded-xl text-sm text-slate-100 placeholder-slate-500 outline-none transition" />
+                  <p class="text-[10px] text-slate-500">Tautan lengkap dengan http:// atau https:// direkomendasikan agar sistem HP dapat melacak otomatis.</p>
+                </div>
+              </div>
+
+              <!-- TAB 2: WIFI INPUTS -->
+              <div id="fields-wifi" class="space-y-4 hidden animate-fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="space-y-1.5">
+                    <label for="input-wifi-ssid" class="text-xs font-medium text-slate-400">Nama Jaringan (SSID)</label>
+                    <input type="text" id="input-wifi-ssid" placeholder="WiFi_Rumah_Keren" class="w-full glass-input px-4 py-3 rounded-xl text-sm text-slate-100 placeholder-slate-500 outline-none transition" />
+                  </div>
+                  <div class="space-y-1.5">
+                    <label for="select-wifi-enc" class="text-xs font-medium text-slate-400">Enkripsi Pengaman</label>
+                    <select id="select-wifi-enc" class="w-full glass-input px-4 py-3 rounded-xl text-sm text-slate-100 outline-none transition">
+                      <option value="WPA" selected class="bg-slate-900">WPA/WPA2</option>
+                      <option value="WEP" class="bg-slate-900">WEP</option>
+                      <option value="nopass" class="bg-slate-900">Tanpa Sandi (Terbuka)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="space-y-1.5" id="wifi-pass-container">
+                  <label for="input-wifi-pass" class="text-xs font-medium text-slate-400">Kata Sandi (Password)</label>
+                  <div class="relative">
+                    <input type="password" id="input-wifi-pass" placeholder="••••••••" class="w-full glass-input pl-4 pr-10 py-3 rounded-xl text-sm text-slate-100 placeholder-slate-500 outline-none transition" />
+                    <button type="button" id="btn-toggle-wifi-pass" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300">
+                      <i data-lucide="eye" class="h-4 w-4"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TAB 3: VCARD CONTACT INPUTS -->
+              <div id="fields-vcard" class="space-y-4 hidden animate-fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="space-y-1.5">
+                    <label for="input-card-name" class="text-xs font-medium text-slate-400">Nama Lengkap</label>
+                    <input type="text" id="input-card-name" placeholder="Budi Santoso" class="w-full glass-input px-4 py-3 rounded-xl text-sm text-slate-100 placeholder-slate-500 outline-none transition" />
+                  </div>
+                  <div class="space-y-1.5">
+                    <label for="input-card-phone" class="text-xs font-medium text-slate-400">Nomor Telepon</label>
+                    <input type="tel" id="input-card-phone" placeholder="+62812345678" class="w-full glass-input px-4 py-3 rounded-xl text-sm text-slate-100 placeholder-slate-500 outline-none transition" />
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="space-y-1.5">
+                    <label for="input-card-email" class="text-xs font-medium text-slate-400">Alamat Email</label>
+                    <input type="email" id="input-card-email" placeholder="budi@perusahaan.com" class="w-full glass-input px-4 py-3 rounded-xl text-sm text-slate-100 placeholder-slate-500 outline-none transition" />
+                  </div>
+                  <div class="space-y-1.5">
+                    <label for="input-card-org" class="text-xs font-medium text-slate-400">Nama Perusahaan / Organisasi</label>
+                    <input type="text" id="input-card-org" placeholder="PT Sukses Bersama" class="w-full glass-input px-4 py-3 rounded-xl text-sm text-slate-100 placeholder-slate-500 outline-none transition" />
+                  </div>
+                </div>
+                <div class="space-y-1.5">
+                  <label for="input-card-url" class="text-xs font-medium text-slate-400">Situs Web (URL)</label>
+                  <input type="text" id="input-card-url" placeholder="https://www.budisantoso.com" class="w-full glass-input px-4 py-3 rounded-xl text-sm text-slate-100 placeholder-slate-500 outline-none transition" />
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- STEP 2: CUSTOMIZE & BRANDING -->
+          <div class="glass-panel p-6 rounded-2xl shadow-xl space-y-6" id="card-customization">
+            <div class="flex items-center space-x-3 pb-4 border-b border-slate-800">
+              <span class="flex items-center justify-center w-7 h-7 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-lg text-xs font-bold">2</span>
+              <h2 class="text-sm font-semibold tracking-wider text-slate-300 uppercase">Kostumisasi & Gaya Visual</h2>
+            </div>
+
+            <!-- GAYA DOT & CORNER DESIGN -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pb-4">
+              <div class="space-y-1.5">
+                <label for="select-dot-style" class="text-xs font-medium text-slate-400">Gaya Titik QR (Dots)</label>
+                <select id="select-dot-style" class="w-full glass-input px-3 py-2.5 rounded-xl text-xs text-slate-100 outline-none transition">
+                  <option value="square" class="bg-slate-900">Standard Square</option>
+                  <option value="rounded" selected class="bg-slate-900">Rounded (Halus)</option>
+                  <option value="extra-rounded" class="bg-slate-900">Extra Rounded</option>
+                  <option value="dots" class="bg-slate-900">Lingkaran Bulat</option>
+                  <option value="classy" class="bg-slate-900">Classy (Melengkung)</option>
+                </select>
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="select-corner-outer" class="text-xs font-medium text-slate-400">Bingkai Sudut (Outer)</label>
+                <select id="select-corner-outer" class="w-full glass-input px-3 py-2.5 rounded-xl text-xs text-slate-100 outline-none transition">
+                  <option value="square" class="bg-slate-900">Standard Square</option>
+                  <option value="dot" class="bg-slate-900">Dot (Bulat)</option>
+                  <option value="extra-rounded" selected class="bg-slate-900">Extra Rounded</option>
+                  <option value="classy" class="bg-slate-900">Classy (Artistik)</option>
+                </select>
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="select-corner-inner" class="text-xs font-medium text-slate-400">Mata Sudut (Inner)</label>
+                <select id="select-corner-inner" class="w-full glass-input px-3 py-2.5 rounded-xl text-xs text-slate-100 outline-none transition">
+                  <option value="square" class="bg-slate-900">Standard Square</option>
+                  <option value="dot" selected class="bg-slate-900">Dot (Bulat)</option>
+                  <option value="rounded" class="bg-slate-900">Rounded (Halus)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- BRANDING LOGO INTEGRATION -->
+            <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <i data-lucide="image" class="h-4 w-4 text-indigo-400"></i>
+                  <span class="text-xs font-semibold text-slate-300">Tambahkan Logo Tengah (Branding)</span>
+                </div>
+                <button type="button" id="btn-clear-logo" class="text-[10px] uppercase font-mono tracking-wide text-rose-400 hover:text-rose-300 transition hidden">Hapus Logo</button>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                <label class="flex flex-col items-center justify-center p-3 border border-dashed border-slate-800 hover:border-slate-700 bg-slate-900/40 hover:bg-slate-900/60 transition-all rounded-xl cursor-pointer">
+                  <span class="text-[11px] text-slate-400 font-medium">Pilih Gambar PNG/JPG</span>
+                  <input type="file" id="input-logo-file" accept="image/*" class="hidden" />
+                </label>
+                <div class="text-[11px] text-slate-500 space-y-1 leading-relaxed">
+                  <p>• Logo akan ditaruh otomatis di tengah QR code.</p>
+                  <p id="txt-logo-status" class="text-indigo-400 font-medium text-[10px] italic">Belum ada logo terunggah.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLOR BUILDER (GRADIENTS & COLORS) -->
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-300 flex items-center space-x-2">
+                  <i data-lucide="palette" class="h-4 w-4 text-pink-400"></i>
+                  <span>Skema Warna QR Code</span>
+                </span>
+                
+                <div class="flex items-center space-x-2">
+                  <label for="switch-gradient" class="text-[11px] text-slate-400">Gunakan Gradasi Warna</label>
+                  <input type="checkbox" id="switch-gradient" class="w-4 h-4 text-indigo-600 focus:ring-0 bg-transparent rounded border-slate-800 cursor-pointer" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Color 1 -->
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
+                  <div>
+                    <p class="text-[10px] text-slate-500 uppercase font-mono">Warna Utama</p>
+                    <span id="lbl-color-primary" class="text-xs font-semibold font-mono text-slate-300">#0f172a</span>
+                  </div>
+                  <input type="color" id="picker-color-primary" value="#0f172a" class="w-10 h-10 border-0 bg-transparent cursor-pointer rounded-lg" />
+                </div>
+
+                <!-- Color 2 (Gradient only) -->
+                <div id="container-color-secondary" class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex items-center justify-between opacity-50 pointer-events-none transition-all duration-200">
+                  <div>
+                    <p class="text-[10px] text-slate-500 uppercase font-mono">Warna Gradasi</p>
+                    <span id="lbl-color-gradient" class="text-xs font-semibold font-mono text-slate-300 font-medium">#6366f1</span>
+                  </div>
+                  <input type="color" id="picker-color-gradient" value="#6366f1" class="w-10 h-10 border-0 bg-transparent cursor-pointer rounded-lg" />
+                </div>
+
+                <!-- Color Bg -->
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
+                  <div>
+                    <p class="text-[10px] text-slate-500 uppercase font-mono">Warna Belakang</p>
+                    <span id="lbl-color-bg" class="text-xs font-semibold font-mono text-slate-300">#ffffff</span>
+                  </div>
+                  <input type="color" id="picker-color-bg" value="#ffffff" class="w-10 h-10 border-0 bg-transparent cursor-pointer rounded-lg" />
+                </div>
+              </div>
+
+              <!-- Extra Gradient Settings -->
+              <div id="container-gradient-settings" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-slate-950 border border-slate-800/80 rounded-xl">
+                <!-- Type -->
+                <div class="space-y-1.5">
+                  <label for="select-gradient-type" class="text-[11px] text-slate-400">Tipe Gradasi</label>
+                  <select id="select-gradient-type" class="w-full glass-input px-3 py-2 rounded-lg text-xs text-slate-100 outline-none transition">
+                    <option value="linear" selected class="bg-slate-900">Linear (Garis Lurus)</option>
+                    <option value="radial" class="bg-slate-900">Radial (Lingkaran Memancar)</option>
+                  </select>
+                </div>
+                <!-- Angle -->
+                <div class="space-y-1.5" id="container-gradient-angle">
+                  <label for="slider-gradient-angle" class="text-[11px] text-slate-400 flex justify-between">
+                    <span>Sudut Gradasi</span>
+                    <span id="lbl-gradient-angle" class="font-mono text-indigo-400">0°</span>
+                  </label>
+                  <input type="range" id="slider-gradient-angle" min="0" max="360" value="0" class="w-full accent-indigo-500 bg-slate-800 h-1.5 rounded-lg appearance-none cursor-pointer" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- RIGHT PANEL: PREVIEW & EXPORT (5 COLS) -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="glass-panel p-6 rounded-2xl shadow-xl flex flex-col items-center justify-between min-h-64 space-y-8 sticky top-24" id="card-generator-output">
+            
+            <div class="w-full text-center border-b border-slate-800 pb-3">
+              <h2 class="text-sm font-semibold tracking-wider text-slate-300 uppercase">Live QR Preview</h2>
+            </div>
+
+            <!-- SCREEN FOR DRAIN RENDER -->
+            <div class="relative group">
+              <!-- Glow backplane -->
+              <div class="absolute -inset-1.5 bg-gradient-to-r from-indigo-500 to-pink-500 rounded-2xl opacity-15 blur-xl group-hover:opacity-20 transition duration-500"></div>
+              
+              <!-- QR CANVAS HOLDER -->
+              <div class="relative bg-white p-5 rounded-2xl shadow-2xl border border-slate-700/10" id="qr-preview-canvas">
+                <!-- Appended dynamically via js -->
+              </div>
+            </div>
+
+            <div class="w-full space-y-4">
+              <!-- RESOLUTION PRESET -->
+              <div class="space-y-1.5">
+                <label for="select-export-size" class="text-xs font-semibold text-slate-400">Pilih Resolusi Ekspor Gambar</label>
+                <select id="select-export-size" class="w-full glass-input px-4 py-2.5 rounded-xl text-xs text-slate-100 outline-none transition">
+                  <option value="350">Preview Instan (350 × 350 px)</option>
+                  <option value="512">Standar Kualitas (512 × 512 px)</option>
+                  <option value="1024" selected>Resolusi Tinggi (1024 × 1024 px) - Direkomendasikan</option>
+                  <option value="2048">Ultra HD Cetak (2048 × 2048 px)</option>
+                </select>
+              </div>
+
+              <!-- ACTION DOWNLOAD BUTTONS -->
+              <div class="grid grid-cols-2 gap-3">
+                <button type="button" id="btn-download-png" class="flex items-center justify-center space-x-2 py-3 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white rounded-xl text-xs font-semibold transition active:scale-[0.98] shadow-md shadow-indigo-500/10">
+                  <i data-lucide="download" class="h-4 w-4"></i>
+                  <span>Unduh PNG</span>
+                </button>
+                <button type="button" id="btn-download-svg" class="flex items-center justify-center space-x-2 py-3 bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 rounded-xl text-xs font-semibold transition active:scale-[0.98]">
+                  <i data-lucide="file-type-2" class="h-4 w-4 text-emerald-400"></i>
+                  <span>Unduh SVG</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SCANNER VIEW -->
+      <section id="view-scanner" class="grid grid-cols-1 lg:grid-cols-12 gap-8 transition-opacity duration-300 hidden">
+        
+        <!-- LEFT PANEL: CONTROL PANELS & CAM (7 COLS) -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="glass-panel p-6 rounded-2xl shadow-xl flex flex-col" id="card-scanner">
+            
+            <!-- STEP TITLE & TABS -->
+            <div class="flex flex-col sm:flex-row items-center justify-between pb-4 border-b border-slate-800 mb-6 gap-4">
+              <div class="flex items-center space-x-3">
+                <i data-lucide="scan-face" class="h-5 w-5 text-indigo-400"></i>
+                <h2 class="text-sm font-semibold tracking-wider text-slate-300 uppercase">Input QR Code Reader</h2>
+              </div>
+
+              <!-- SCANNER SUB-TABS -->
+              <div class="flex bg-slate-950 p-1 rounded-xl border border-slate-800 text-[11px]" id="scanner-tabs">
+                <button id="tab-scan-camera" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-slate-900 border border-slate-800 font-medium transition duration-200">
+                  Kamera Live
+                </button>
+                <button id="tab-scan-file" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 font-medium transition duration-200">
+                  Unggah Gambar
+                </button>
+              </div>
+            </div>
+
+            <!-- LIVE CAMERA VIEWPORT -->
+            <div id="container-scan-camera" class="space-y-6">
+              
+              <!-- CAMERA SELECTORS -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+                <div class="space-y-1.5">
+                  <label for="select-camera-source" class="text-xs font-medium text-slate-400">Pilih Lensa Kamera</label>
+                  <select id="select-camera-source" class="w-full glass-input px-3 py-2 rounded-xl text-xs text-slate-100 outline-none transition">
+                    <option value="" disabled selected class="bg-slate-900">Menunggu Izin Kamera...</option>
+                  </select>
+                </div>
+
+                <div class="flex space-x-2">
+                  <button type="button" id="btn-camera-start" class="flex-1 flex items-center justify-center space-x-1.5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-xl text-xs font-semibold transition active:scale-[0.98]">
+                    <i data-lucide="play" class="h-3.5 w-3.5"></i>
+                    <span>Mulai Kamera</span>
+                  </button>
+                  <button type="button" id="btn-camera-stop" class="flex-1 flex items-center justify-center space-x-1.5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-semibold transition active:scale-[0.98] opacity-50 pointer-events-none">
+                    <i data-lucide="square" class="h-3.5 w-3.5"></i>
+                    <span>Hentikan</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- VIEWPORT BOUNDS -->
+              <div class="relative rounded-2xl overflow-hidden aspect-video bg-slate-950 border border-slate-800 flex flex-col items-center justify-center w-full shadow-inner">
+                
+                <!-- QR Camera Streaming Target -->
+                <div id="html5-qr-reader" class="w-full h-full max-h-96 min-h-64"></div>
+
+                <!-- OVERLAYS: SCANNING VIEWPORT LASER EFFECTS -->
+                <div id="scan-viewfinder" class="absolute hidden flex flex-col items-center justify-center pointer-events-none inset-0 border-[36px] sm:border-[48px] md:border-[64px] border-slate-900/40">
+                  <div class="relative w-48 h-48 md:w-56 md:h-56 border border-slate-100/35 rounded-xl shadow-2xl">
+                    <!-- Laser Scanner slider -->
+                    <div class="absolute left-0 right-0 h-0.5 bg-rose-500/80 shadow-[0_0_12px_rgba(239,68,68,0.8)] scanner-laser"></div>
+                    <!-- Viewfinder bracket corners -->
+                    <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-indigo-400 rounded-tl-md"></div>
+                    <div class="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-indigo-400 rounded-tr-md"></div>
+                    <div class="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-indigo-400 rounded-bl-md"></div>
+                    <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-indigo-400 rounded-br-md"></div>
+                  </div>
+                </div>
+
+                <!-- SCREEN NOT STARTED STATE -->
+                <div id="viewport-not-active" class="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center text-center p-6 space-y-4">
+                  <div class="p-4 bg-slate-900 rounded-full border border-slate-800 text-slate-400">
+                    <i data-lucide="video-off" class="h-8 w-8 animate-pulse text-indigo-400"></i>
+                  </div>
+                  <div class="space-y-1">
+                    <h3 class="text-sm font-semibold text-slate-300">Kamera Belum Aktif</h3>
+                    <p class="text-[11px] text-slate-500 max-w-xs mx-auto">Ketuk 'Mulai Kamera' di atas, berikan izin akses guna mendeteksi QR code langsung.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- FILE UPLOAD CONTAINER -->
+            <div id="container-scan-file" class="hidden space-y-6">
+              <label for="input-scan-image-file" class="flex flex-col items-center justify-center p-8 border-2 border-dashed border-slate-800 hover:border-indigo-500/40 bg-slate-950 hover:bg-indigo-950/10 transition-all rounded-2xl cursor-pointer group text-center space-y-4 min-h-64">
+                <input type="file" id="input-scan-image-file" accept="image/*" class="hidden" />
+                <div class="p-4 bg-slate-900 group-hover:bg-indigo-950/30 rounded-full border border-slate-800 group-hover:border-indigo-500/20 text-slate-400 group-hover:text-indigo-400 transition">
+                  <i data-lucide="upload-cloud" class="h-8 w-8"></i>
+                </div>
+                <div class="space-y-1">
+                  <p class="text-sm font-semibold text-slate-300">Klik / Tarik File Gambar QR ke Sini</p>
+                  <p class="text-[11px] text-slate-500">Mendukung format gambaran PNG, JPG, JPEG, WEBP.</p>
+                </div>
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- RIGHT PANEL: DECODED RESULTS (5 COLS) -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="glass-panel p-6 rounded-2xl shadow-xl space-y-6 sticky top-24" id="card-scanner-results">
+            
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h2 class="text-sm font-semibold tracking-wider text-slate-300 uppercase">Panel Hasil Scan</h2>
+              <!-- RESET RESULT -->
+              <button type="button" id="btn-result-reset" class="text-[10px] uppercase font-mono tracking-wide text-indigo-400 hover:text-indigo-300 transition-all">Bersihkan</button>
+            </div>
+
+            <!-- NO DATA DECODED STATE -->
+            <div id="result-state-empty" class="text-center py-12 space-y-4">
+              <div class="p-3 bg-slate-900 w-fit mx-auto rounded-xl border border-slate-800/80 text-slate-500">
+                <i data-lucide="shield-alert" class="h-6 w-6"></i>
+              </div>
+              <div class="space-y-1">
+                <p class="text-xs font-semibold text-slate-400">Menunggu Pemindaian</p>
+                <p class="text-[10px] text-slate-500 max-w-xs mx-auto">Arahkan kamera atau unggah berkas QR Code untuk membedah muatan datanya secara instan.</p>
+              </div>
+            </div>
+
+            <!-- DECODED DATA DISPLAY STATE -->
+            <div id="result-state-payload" class="hidden space-y-5 animate-fade-in">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                Decoding Sukses
+              </span>
+
+              <!-- RAW TEXT READOUT -->
+              <div class="space-y-1.5">
+                <label class="text-[11px] font-semibold text-slate-500 uppercase font-mono">Payload Mentah (Raw Text)</label>
+                <div class="relative bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs text-slate-200 leading-relaxed break-all font-mono selection:bg-slate-800 max-h-48 overflow-y-auto">
+                  <div id="txt-scan-raw">Sandi Jaringan</div>
+                </div>
+              </div>
+
+              <!-- ACTION BAR -->
+              <div class="grid grid-cols-2 gap-3 pb-3 border-b border-slate-800/80">
+                <button type="button" id="btn-result-copy" class="flex items-center justify-center space-x-1.5 py-2.5 bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-100 rounded-lg text-xs font-semibold transition">
+                  <i data-lucide="copy" class="h-3.5 w-3.5"></i>
+                  <span>Salin Payload</span>
+                </button>
+                <a id="btn-result-action-url" target="_blank" rel="noopener noreferrer" href="#" class="flex items-center justify-center space-x-1.5 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-600 text-white rounded-lg text-xs font-semibold transition opacity-50 pointer-events-none">
+                  <i data-lucide="external-link" class="h-3.5 w-3.5"></i>
+                  <span>Buka Tautan</span>
+                </a>
+              </div>
+
+              <!-- STRUCTURED DATA TYPE INTERPRETER -->
+              <div id="scanner-interpreter" class="space-y-4">
+                
+                <!-- WIFI SPECIFIC CARD -->
+                <div id="interpreted-wifi" class="hidden p-4 bg-emerald-500/5 rounded-xl border border-emerald-500/20 space-y-3">
+                  <div class="flex items-center space-x-2 text-emerald-400 font-bold text-xs uppercase tracking-wide">
+                    <i data-lucide="wifi" class="h-4 w-4"></i>
+                    <span>Tipe Terpadu: WiFi Network</span>
+                  </div>
+                  <div class="grid grid-cols-2 gap-3 text-[11px]">
+                    <div>
+                      <p class="text-slate-500 font-mono">SSID (Nama Jaringan)</p>
+                      <p id="lbl-scan-wifi-ssid" class="font-bold text-slate-200">WiFi Rumah</p>
+                    </div>
+                    <div>
+                      <p class="text-slate-500 font-mono">Proteksi / Kunci</p>
+                      <p id="lbl-scan-wifi-enc" class="font-bold text-slate-200">WPA</p>
+                    </div>
+                  </div>
+                  <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 flex items-center justify-between text-[11px]">
+                    <div>
+                      <span class="text-slate-500 font-mono block">Mata Sandi</span>
+                      <span id="lbl-scan-wifi-pass" class="font-mono text-slate-200 font-semibold tracking-wider">••••••••</span>
+                    </div>
+                    <button type="button" id="btn-scan-wifi-copy-pass" class="text-slate-400 hover:text-slate-200 p-1 rounded">
+                      <i data-lucide="copy" class="h-3.5 w-3.5"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- VCARD CONTACT CARD -->
+                <div id="interpreted-vcard" class="hidden p-4 bg-amber-500/5 rounded-xl border border-amber-500/20 space-y-4">
+                  <div class="flex items-center space-x-2 text-amber-500 font-bold text-xs uppercase tracking-wide">
+                    <i data-lucide="contact-2" class="h-4 w-4"></i>
+                    <span>Tipe Terpadu: vCard Kontak</span>
+                  </div>
+
+                  <div class="relative bg-slate-950 p-4 border border-slate-800 rounded-xl overflow-hidden shadow-lg space-y-4">
+                    <div class="absolute top-0 right-0 h-16 w-16 bg-amber-500/10 rounded-bl-full z-0 flex items-center justify-center pl-4 pb-4">
+                      <i data-lucide="user" class="h-6 w-6 text-amber-300"></i>
+                    </div>
+
+                    <div class="relative z-10">
+                      <h4 id="lbl-scan-card-name" class="font-bold text-sm text-slate-100">Budi Santoso</h4>
+                      <p id="lbl-scan-card-org" class="text-[10px] uppercase font-mono tracking-wider text-slate-400 text-indigo-400 mt-0.5">Nama Perusahaan / Organisasi</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-2 pt-2 border-t border-slate-900 border-dashed text-[11px] relative z-10">
+                      <div class="flex items-center space-x-2">
+                        <i data-lucide="phone" class="h-3.5 w-3.5 text-slate-500"></i>
+                        <span id="lbl-scan-card-phone" class="text-slate-300 font-sans">+62 812 3456 78</span>
+                      </div>
+                      <div class="flex items-center space-x-2 text-slate-300">
+                        <i data-lucide="mail" class="h-3.5 w-3.5 text-slate-500"></i>
+                        <span id="lbl-scan-card-email" class="font-sans break-all">budi@perusahaan.com</span>
+                      </div>
+                      <div class="flex items-center space-x-2">
+                        <i data-lucide="globe" class="h-3.5 w-3.5 text-slate-500"></i>
+                        <span id="lbl-scan-card-url" class="font-sans text-indigo-400 underline break-all">www.budisantoso.com</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- PLAIN TEXT SEARCH CARD -->
+                <div id="interpreted-text" class="p-3 bg-slate-900 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
+                  <span class="text-slate-400 leading-normal">Bentuk Plain Text biasa. Telusuri langsung via Google?</span>
+                  <a id="btn-google-search" target="_blank" rel="noopener noreferrer" href="#" class="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold transition border border-slate-700">
+                    <i data-lucide="search" class="h-3.5 w-3.5"></i>
+                    <span>Cari</span>
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 mt-auto">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <p>© 2026 QRF. Dibuat oleh Faizal Dwi Al Farizi.</p>
+        <div class="flex space-x-4">
+          <span class="flex items-center space-x-1">
+            <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+            <span>Local Engine Live</span>
+          </span>
+          <span>•</span>
+          <span class="font-mono text-[10px]">v1.2.0 (Stable)</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- MAIN APP LIBRARIES + SCRIPT -->
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
